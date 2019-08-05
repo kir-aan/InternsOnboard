@@ -1,0 +1,14 @@
+{% extends 'InternsOnboardMain/base.html' %}
+{% block content %}
+    <br>
+    <h1>Profile</h1>
+    <h3>Username: {{ user.username }}</h3>
+    <h3>Usertype: 
+        {% if user.userprofile.usertype == 's' %}
+        student {% elif user.userprofile.usertype == 'ic' %}
+        internship-coordinator
+        {% elif user.userprofile.usertype == 'h' %}
+        HOD
+        {% endif %}
+        </h3>
+{% endblock content %}

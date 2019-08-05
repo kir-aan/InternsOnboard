@@ -20,6 +20,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'InternsOnboardMain.apps.InternsonboardmainConfig',
+    'userRegister.apps.UserregisterConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -123,5 +124,5 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-# LOGIN_REDIRECT_URL = 'TakeTest-Home'
-# LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'InternsOnboard-Home'
+LOGIN_URL = 'login'

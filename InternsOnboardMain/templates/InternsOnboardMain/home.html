@@ -1,4 +1,14 @@
 {% extends 'InternsOnboardMain/base.html' %}
 {% block content %}
-    <h1>If user is not logged in, show this default page</h1>
+    <h2>
+    {% if user.userprofile.usertype == 's' %}
+        Show list of internships available.
+    {% elif user.userprofile.usertype == 'ic' %}
+        Show list of internships posted and a form to create new internship post.
+    {% elif user.userprofile.usertype == 'h' %}
+        Show list of students along with the company they are interns at.
+    {% else %}
+        Show default home page.
+    {% endif %}
+    </h2>    
 {% endblock content%}
