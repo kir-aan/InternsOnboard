@@ -5,6 +5,13 @@ from .forms import InternshipsUploadForm
 from InternsOnboardMain.models import internshipPost
 from django.contrib.auth.models import User
 
+from rest_framework.generics import ListAPIView
+from .serializers import internshipSerializer
+
+class internshipListAPIView(ListAPIView):
+  queryset = internshipPost.objects.all()
+  serializer_class = internshipSerializer
+
 
 @login_required
 def post(request):

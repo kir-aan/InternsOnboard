@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     'userRegister.apps.UserregisterConfig',
     'coordinatorPortal.apps.CoordinatorportalConfig',
     'crispy_forms',
+    'rest_framework',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
