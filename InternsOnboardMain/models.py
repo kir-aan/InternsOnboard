@@ -2,6 +2,9 @@ from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
 
+
+#Add serialization to this model
+
 class internshipPost(models.Model):
     Uploader_info = models.CharField(max_length=100, editable=False, null = True)
     company_name = models.CharField(max_length=100,blank=False)
@@ -11,5 +14,3 @@ class internshipPost(models.Model):
 
     def __str__(self):
         return self.company_name
-
-
