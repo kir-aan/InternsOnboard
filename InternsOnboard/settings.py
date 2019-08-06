@@ -21,6 +21,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'InternsOnboardMain.apps.InternsonboardmainConfig',
     'userRegister.apps.UserregisterConfig',
+    'coordinatorPortal.apps.CoordinatorportalConfig',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
