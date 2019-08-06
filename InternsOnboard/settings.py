@@ -22,6 +22,7 @@ INSTALLED_APPS = [
     'InternsOnboardMain.apps.InternsonboardmainConfig',
     'userRegister.apps.UserregisterConfig',
     'coordinatorPortal.apps.CoordinatorportalConfig',
+    'studentPortal.apps.StudentportalConfig',
     'crispy_forms',
     'rest_framework',
     'django.contrib.admin',

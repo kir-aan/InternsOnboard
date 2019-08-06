@@ -2,9 +2,53 @@
 {% block content %}
     <h2>
     {% if user.userprofile.usertype == 's' %}
-        Show list of internships available.
+    <br><h1>Current internships</h1><hr> 
+    {% for internship in internships %}
+    <div class="card border mb-3">
+        <div class="card-header">
+         <div align="left">
+             <h2>{{ internship.company_name }}</h2>
+            <span style="float: right;">
+            <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5></span>
+        </div>
+        </div>
+            <div class="card-body">
+                <h3>{{ internship.discription }}
+                <span style="float: right;">
+                    <form method="get" action="#">
+                    <button class="btn btn-info">Apply</button>
+                    </form>
+                </span></h3>
+            </div>
+        </div>
+        <br>
+   {% endfor %}
+
     {% elif user.userprofile.usertype == 'ic' %}
-        Show list of internships posted and a form to create new internship post.
+    <form method="get" action="{% url 'internship-Post' %}">
+        <br>
+        <div>Current Internships 
+            <button style="float: right;" class="btn btn-info" type="submit">
+             Add new internship </button>
+            </div>
+        <br>
+      </form>
+      {% for internship in internships %}
+        <div class="card border mb-3">
+            <div class="card-header">
+             <div align="left">
+            {{ internship.company_name }}
+            <span style="float: right;">
+                <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5></span>
+            </div>
+            </div>
+                <div class="card-body">
+                    <h3>{{ internship.discription}}</h3>
+                </div>
+            </div>
+            <br>
+       {% endfor %}
+    
     {% elif user.userprofile.usertype == 'h' %}
         Show list of students along with the company they are interns at.
     {% else %}
