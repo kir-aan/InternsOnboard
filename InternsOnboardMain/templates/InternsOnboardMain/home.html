@@ -15,8 +15,8 @@
             <div class="card-body">
                 <h3>{{ internship.discription }}
                 <span style="float: right;">
-                    <form method="get" action="#">
-                    <button class="btn btn-info">Apply</button>
+                    <form method="get" action="{% url 'student-apply' %}">
+                    <button class="btn btn-info" name="applybtn">Apply</button>
                     </form>
                 </span></h3>
             </div>
