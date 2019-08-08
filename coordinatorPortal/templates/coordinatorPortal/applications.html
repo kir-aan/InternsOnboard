@@ -8,12 +8,17 @@
     <div class="card border mb-3">
         <div class="card-header">
         <div align="left">
+        <form method="POST" action="{% url 'internship-accept' %}">
+            {% csrf_token %} 
         {{ internApplied.companyName }}
         </div>
         </div>
             <div class="card-body">
-                <h3>{{ internApplied.studentName}}
+                <h3>{{ internApplied.studentName }}
+                <input type="text" name="s_name" value="{{ internApplied.studentName }}" style="visibility: hidden;">
+                <input type="text" name="c_name" value="{{ internApplied.companyName }}" style="visibility: hidden;">
                 <button style="float: right" class="btn btn-info" name="Acceptbtn">Accept</button>
+                </form>
             </h3>
             </div>
         </div>
