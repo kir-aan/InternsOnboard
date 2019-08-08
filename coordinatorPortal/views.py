@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from .forms import InternshipsUploadForm
 from InternsOnboardMain.models import internshipPost
 from django.contrib.auth.models import User
-
+from studentPortal.models import studentInternship
 from rest_framework.generics import ListAPIView
 from .serializers import internshipSerializer
 
@@ -38,3 +38,8 @@ def post(request):
     else:
         form = InternshipsUploadForm()
         return render(request, 'coordinatorPortal/post.html', {'form': form})
+
+
+def applications(request):
+    internApplication = studentInternship.objects.all()
+    return render(request,'coordinatorPortal/applications.html',{'internApplication':internApplication})

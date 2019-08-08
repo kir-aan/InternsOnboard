@@ -1,0 +1,27 @@
+{% extends 'InternsOnboardMain/base.html' %}
+{% block content %}
+<div class="content-section">
+    <br>
+   <h1>Internship Applications:</h1><br>
+{% if user.userprofile.usertype == 'ic' %}
+    {% for internApplied in internApplication %}
+    <div class="card border mb-3">
+        <div class="card-header">
+        <div align="left">
+        {{ internApplied.companyName }}
+        </div>
+        </div>
+            <div class="card-body">
+                <h3>{{ internApplied.studentName}}
+                <button style="float: right" class="btn btn-info" name="Acceptbtn">Accept</button>
+            </h3>
+            </div>
+        </div>
+        <br>
+    {% endfor %}
+{% else %}
+  <br>
+  <h3 class="text-danger" style="text-align:center;">Action not allowed!</h3>
+{% endif %}
+</div>
+{% endblock content %}
