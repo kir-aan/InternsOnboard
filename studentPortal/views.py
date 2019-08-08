@@ -4,25 +4,20 @@ from .models import studentInternship
 from .forms import studentInternshipForm
 from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
+from InternsOnboardMain.models import internshipPost
 
-# def apply(request):
-#     if request.GET.get('applybtn'):
-#         profil = get_object_or_404(studentInternship)
-#         profil.applied = True
-#         profil.save(update_fields=["applied"])
-#         # profil.create(applied=True)
-#         return render(request, 'InternsOnboard-Home')
-#     return render(request, 'InternsOnboardMain/home.html')
-
+@login_required
 def apply(request):
-    if studentInternship.applied:
-        studentinternship = studentInternship(
-            applied=True
-        )
-        studentinternship.save()
-        messages.success(request, 'Applied!')
-    else:
-        messages.warning(request,'You have already applied!')
-    return redirect('InternsOnboard-Home')
+    currentStudentName = request.user
+    c = request.POST['c_name']
+    currentCompany=internshipPost.objects.get(company_name=c)
+    studentinternship = studentInternship(
+        studentName=currentStudentName,
+        applied=True,
+        companyName= currentCompany
+    )
 
-            
+    studentinternship.save()
+    messages.success(request, 'Applied!')
+    return redirect('InternsOnboard-Home')

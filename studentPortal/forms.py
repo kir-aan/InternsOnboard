@@ -1,5 +1,6 @@
 from django import forms
 from .models import studentInternship
+from InternsOnboardMain.models import internshipPost
 from crispy_forms.helper import FormHelper
 
 
