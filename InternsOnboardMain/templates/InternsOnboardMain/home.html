@@ -19,7 +19,8 @@
                 <h3>{{ internship.discription }}
                 <span style="float: right;">
                     <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
-                        <button class="btn btn-info" name="applybtn">Apply</button>
+                        <button class="btn btn-success" name="applybtn">Apply</button>
+                        <button class="btn btn-danger" name="rejectbtn">Reject</button>
                         {{ form|crispy }}
                     </form>
                 </span></h3>
