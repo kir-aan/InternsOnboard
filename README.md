@@ -3,7 +3,7 @@
 
 - [x] Students can look at the current internships that are open.
 
-- [ ] Students can apply or reject the internships listed.
+- [x] Students can apply or reject the internships listed.
 
 - [ ] If students applies for an internship the coordinators can then either accept or reject them for the internship they applied for
 
