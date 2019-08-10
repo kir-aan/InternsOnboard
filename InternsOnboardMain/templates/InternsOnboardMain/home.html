@@ -30,14 +30,16 @@
    {% endfor %}
 
     {% elif user.userprofile.usertype == 'ic' %}
-    <form method="get" action="{% url 'internship-Post' %}">
         <br>
         <div>Current Internships
-            <button style="float: right;" class="btn btn-info" type="submit">
-             Add new internship </button>
+            <a href="{% url 'internship-applications' %}">
+            <button style="float: right; background-color: #3d6999;" class="btn btn-info" type="submit">
+            View applications </button></a>
+            <a href="{% url 'internship-Post' %}">
+            <button style="float: right; margin-right: 10px;" class="btn btn-info" type="submit">
+             Add new internship </button></a>
             </div>
         <br>
-      </form>
       {% for internship in internships %}
         <div class="card border mb-3">
             <div class="card-header">
@@ -55,21 +57,35 @@
        {% endfor %}
 
     {% elif user.userprofile.usertype == 'h' %}
-    <h1>Final applicants</h1>
-        {% for finalapplicant in finalApplicant %}
-
-        <br>
-        <div class="card border mb-3">
-                <div class="card-header">
-                 <div align="left">
-                <h3>{{ finalapplicant.company_Name }}</h3>
-                </div>
-                </div>
-                <div class="card-body">
-                    <h3>{{ finalapplicant.student_Name }}</h3>
-                </div>
-            </div>
-        {% endfor %}
+    <h1>Final applicants</h1><hr><br>
+    <table class="table table-hover" style="border: 2px solid grey">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Student Name</th>
+                <th scope="col">Company Name</th>
+                <th scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for finalapplicant in finalApplicant %}
+                {% if finalapplicant.accepted %}
+                    <tr class="table-success">
+                {% else %}
+                    <tr class="table-warning">
+                {% endif %}
+                    <th scope="row">{{ forloop.counter }}</th>
+                    <td>{{ finalapplicant.student_Name }}</td>
+                    <td>{{ finalapplicant.company_Name }}</td>
+                    {% if finalapplicant.accepted %}
+                        <td style="color:darkgreen;"><b>Accepted</b></td>
+                    {% else %}
+                        <td style="color:rgb(179, 28, 28);"><b>Rejected</b></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+    </table>
     {% else %}
         Show default home page.
     {% endif %}
