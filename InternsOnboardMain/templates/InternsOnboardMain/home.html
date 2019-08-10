@@ -3,36 +3,36 @@
 {% block content %}
     <h2>
     {% if user.userprofile.usertype == 's' %}
-    <br><h1>Current internships</h1><hr> 
+    <br><h1>Current internships</h1><hr>
     {% for internship in internships %}
     <div class="card border mb-3">
         <div class="card-header">
          <div align="left">
             <form method="POST" action="{% url 'student-apply' %}">
-                    {% csrf_token %} 
+              {% csrf_token %}
              <h2>{{ internship.company_name }}</h2>
             <span style="float: right;">
             <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5></span>
         </div>
         </div>
-            <div class="card-body">
-                <h3>{{ internship.discription }}
-                <span style="float: right;">
-                    <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
-                        <button class="btn btn-success" name="applybtn">Apply</button>
-                        <button class="btn btn-danger" name="rejectbtn">Reject</button>
-                        {{ form|crispy }}
-                    </form>
+        <div class="card-body">
+          <h3>{{ internship.discription }}
+          <span style="float: right;">
+          <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
+          <button type="submit" class="btn btn-success" name="applybtn">Apply</button>
+          <button type="submit" class="btn btn-warning" name="rejectbtn">Reject</button>
                 </span></h3>
             </div>
         </div>
+        </form>
+
         <br>
    {% endfor %}
 
     {% elif user.userprofile.usertype == 'ic' %}
     <form method="get" action="{% url 'internship-Post' %}">
         <br>
-        <div>Current Internships 
+        <div>Current Internships
             <button style="float: right;" class="btn btn-info" type="submit">
              Add new internship </button>
             </div>
@@ -53,7 +53,7 @@
         </div>
             <br>
        {% endfor %}
-    
+
     {% elif user.userprofile.usertype == 'h' %}
     <h1>Final applicants</h1>
         {% for finalapplicant in finalApplicant %}
@@ -73,5 +73,5 @@
     {% else %}
         Show default home page.
     {% endif %}
-    </h2>    
+    </h2>
 {% endblock content%}
