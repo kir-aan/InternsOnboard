@@ -1,4 +1,5 @@
 {% extends 'InternsOnboardMain/base.html' %}
+{% load crispy_forms_tags %}
 {% block content %}
     <h2>
     {% if user.userprofile.usertype == 's' %}
@@ -7,6 +8,8 @@
     <div class="card border mb-3">
         <div class="card-header">
          <div align="left">
+            <form method="POST" action="{% url 'student-apply' %}">
+                    {% csrf_token %} 
              <h2>{{ internship.company_name }}</h2>
             <span style="float: right;">
             <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5></span>
@@ -15,8 +18,9 @@
             <div class="card-body">
                 <h3>{{ internship.discription }}
                 <span style="float: right;">
-                    <form method="get" action="#">
-                    <button class="btn btn-info">Apply</button>
+                    <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
+                        <button class="btn btn-info" name="applybtn">Apply</button>
+                        {{ form|crispy }}
                     </form>
                 </span></h3>
             </div>
@@ -45,12 +49,26 @@
                 <div class="card-body">
                     <h3>{{ internship.discription}}</h3>
                 </div>
-            </div>
+        </div>
             <br>
        {% endfor %}
     
     {% elif user.userprofile.usertype == 'h' %}
-        Show list of students along with the company they are interns at.
+    <h1>Final applicants</h1>
+        {% for finalapplicant in finalApplicant %}
+
+        <br>
+        <div class="card border mb-3">
+                <div class="card-header">
+                 <div align="left">
+                <h3>{{ finalapplicant.company_Name }}</h3>
+                </div>
+                </div>
+                <div class="card-body">
+                    <h3>{{ finalapplicant.student_Name }}</h3>
+                </div>
+            </div>
+        {% endfor %}
     {% else %}
         Show default home page.
     {% endif %}

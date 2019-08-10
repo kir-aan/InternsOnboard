@@ -6,5 +6,7 @@ from . import views
 
 urlpatterns=[
     path('post/', views.post, name="internship-Post"),
-    path('', views.internshipListAPIView.as_view(), name=""),
+    path('application/', views.applications, name="internship-applications"),
+    path('accept/',views.accept,name="internship-accept"),
+    path('api/posts/', views.internshipListAPIView.as_view(), name="api-view"),
 ]

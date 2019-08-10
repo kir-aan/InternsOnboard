@@ -4,9 +4,10 @@ from django.contrib.auth.decorators import login_required
 from .forms import InternshipsUploadForm
 from InternsOnboardMain.models import internshipPost
 from django.contrib.auth.models import User
-
+from studentPortal.models import studentInternship
 from rest_framework.generics import ListAPIView
 from .serializers import internshipSerializer
+from .models import finalApplicants
 
 class internshipListAPIView(ListAPIView):
   queryset = internshipPost.objects.all()
@@ -38,3 +39,23 @@ def post(request):
     else:
         form = InternshipsUploadForm()
         return render(request, 'coordinatorPortal/post.html', {'form': form})
+
+
+def applications(request):
+    internApplication = studentInternship.objects.all()
+    return render(request,'coordinatorPortal/applications.html',{'internApplication':internApplication})
+
+
+@login_required
+def accept(request):
+    currentStudentName = request.POST.get('s_name')
+    currentCompanyName = request.POST.get('c_name')
+    # currentCompany=studentInternship.objects.get(companyName=currentCompanyName)
+    # currentStudent=studentInternship.objects.get(studentName=currentStudentName)
+    finalApplicants.objects.create(
+        accepted=True,
+        company_Name=currentCompanyName,
+        student_Name=currentStudentName
+    )
+    messages.success(request, 'Accepted!')
+    return redirect('internship-applications')
