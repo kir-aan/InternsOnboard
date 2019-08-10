@@ -3,7 +3,7 @@ from .models import internshipPost
 from coordinatorPortal.models import finalApplicants
 
 def home(request):
-    internships = internshipPost.objects.all()
+    internships = internshipPost.objects.all().order_by('-created_at') # change to desc order
     finalApplicant = finalApplicants.objects.all()
     return render(request,'InternsOnboardMain/home.html',{'internships':internships,'finalApplicant':finalApplicant})
 

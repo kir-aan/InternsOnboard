@@ -30,14 +30,18 @@
    {% endfor %}
 
     {% elif user.userprofile.usertype == 'ic' %}
-    <form method="get" action="{% url 'internship-Post' %}">
+    <!-- <form method="get" action="{% url 'internship-Post' %}"> -->
         <br>
         <div>Current Internships
-            <button style="float: right;" class="btn btn-info" type="submit">
-             Add new internship </button>
+            <a href="{% url 'internship-applications' %}">
+            <button style="float: right; background-color: #3d6999;" class="btn btn-info" type="submit">
+            View applications </button></a>
+            <a href="{% url 'internship-Post' %}">
+            <button style="float: right; margin-right: 10px;" class="btn btn-info" type="submit">
+             Add new internship </button></a>
             </div>
         <br>
-      </form>
+      <!-- </form> -->
       {% for internship in internships %}
         <div class="card border mb-3">
             <div class="card-header">
