@@ -7,8 +7,8 @@
     {% for internApplied in internApplication %}
     <div class="card border mb-3">
         <div class="card-header">
-        <div align="left">
         <form method="POST" action="{% url 'internship-accept' %}">
+        <div align="left">
             {% csrf_token %} 
         {{ internApplied.companyName }}
         </div>
@@ -17,9 +17,10 @@
                 <h3>{{ internApplied.studentName }}
                 <input type="text" name="s_name" value="{{ internApplied.studentName }}" style="visibility: hidden;">
                 <input type="text" name="c_name" value="{{ internApplied.companyName }}" style="visibility: hidden;">
-                <button style="float: right" class="btn btn-warning" name="Rejectbtn">Reject</button>
-                <button style="float: right" class="btn btn-info" name="Acceptbtn">Accept</button>
-                </form>
+                <span style="float: right;">
+                <button type="submit" class="btn btn-success" name="acceptbtn">Accept</button>
+                <button type="submit" class="btn btn-warning" name="rejectbtn">Reject</button>
+                </span></form>
             </h3>
             </div>
         </div>

@@ -21,7 +21,7 @@ def apply(request):
         ## else --> create db entry
         try:
             queryset = studentInternship.objects.filter(studentName=currentStudentName)
-            test = 0
+            check = 0
             for q in queryset:
                 if q.companyName.company_name == c:
                     if q.applied==True:
@@ -30,8 +30,8 @@ def apply(request):
                         q.applied=True
                         q.save()
                         messages.success(request,"Applied!")
-                    test=1
-            if test==0:
+                    check=1
+            if check==0:
                 studentinternship = studentInternship(studentName=currentStudentName,applied=True,companyName= currentCompany)
                 studentinternship.save()
                 messages.success(request,"Applied!")
@@ -46,16 +46,15 @@ def apply(request):
         # add currentStudentName linked with currentCompany as rejected.
         try:
             queryset = studentInternship.objects.filter(studentName=currentStudentName)
-            test = 0
+            check = 0
             for q in queryset:
                 if q.companyName.company_name == c:
                     q.applied=False
                     q.save()
-                    test=1
-            if test==0:
+                    check=1
+            if check==0:
                 studentinternship = studentInternship(studentName=currentStudentName,applied=False,companyName= currentCompany)
                 studentinternship.save()
-
             messages.warning(request,'Rejected!')
         except Exception as e:
             messages.warning(request,"Unexpected error: "+str(e))

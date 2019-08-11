@@ -46,16 +46,81 @@ def applications(request):
     return render(request,'coordinatorPortal/applications.html',{'internApplication':internApplication})
 
 
+
+# check if company_Name and student_Name is already in the db:
+	#True-->
+		# update/don't update based on accepted value currently stored.
+	#False-->create a new db entry with selected button as accepted status
+# accepted = True if accept button clicked, False if reject button clicked
 @login_required
 def accept(request):
-    currentStudentName = request.POST.get('s_name')
-    currentCompanyName = request.POST.get('c_name')
-    # currentCompany=studentInternship.objects.get(companyName=currentCompanyName)
-    # currentStudent=studentInternship.objects.get(studentName=currentStudentName)
-    finalApplicants.objects.create(
-        accepted=True,
-        company_Name=currentCompanyName,
-        student_Name=currentStudentName
-    )
-    messages.success(request, 'Accepted!')
+    if "acceptbtn" in request.POST:
+        currentStudentName = request.POST.get('s_name')
+        currentCompanyName = request.POST.get('c_name')
+        try:
+            queryset = finalApplicants.objects.filter(student_Name=currentStudentName)
+            check = 0
+            for q in queryset:
+                if q.company_Name == currentCompanyName:
+                    if q.accepted:
+                        messages.warning(request,"Already accepted")
+                    else:
+                        q.accepted=True
+                        q.save()
+                        messages.success(request,"Accepted!")
+                    check = 1
+            if(check==0):
+                finalApplicants.objects.create(
+                    student_Name = currentStudentName,
+                    company_Name = currentCompanyName,
+                    accepted = True
+                )
+                messages.success(request,"Accepted!")
+        except Exception as e:
+            messages.warning(request,"Unexpected error: "+str(e))
+    else:
+        currentStudentName = request.POST.get('s_name')
+        currentCompanyName = request.POST.get('c_name')
+        try:
+            queryset = finalApplicants.objects.filter(student_Name=currentStudentName)
+            check = 0
+            for q in queryset:
+                if q.company_Name == currentCompanyName:
+                    if q.accepted:
+                        q.accepted=False
+                        q.save()
+                        messages.warning(request,"Rejected!")
+                    else:
+                        messages.warning(request,"Already Rejected!")
+                    check = 1
+            if(check==0):
+                finalApplicants.objects.create(
+                    student_Name = currentStudentName,
+                    company_Name = currentCompanyName,
+                    accepted = False
+                )
+                messages.success(request,"Rejected!")
+        except Exception as e:
+            messages.warning("Unexpected error: "+str(e))
+
     return redirect('internship-applications')
+
+
+@login_required
+def deleteInternship(request):
+    if 'deletebtn' in request.POST:
+        currentCompanyName = request.POST.get('c_name')
+        currentCompanyDiscription = request.POST.get('c_discription')
+        try:
+            queryset = internshipPost.objects.filter(company_name=currentCompanyName)
+            check = 0
+            for q in queryset:
+                if q.discription==currentCompanyDiscription:
+                    q.delete()
+                    check=1
+                    messages.success(request,'Internship deleted!')
+            if check==0:
+                messages.warning(request,'No such internship!')
+        except Exception as e:
+            messages.warning("Unexpected error: "+str(e))
+    return redirect('InternsOnboard-Home')
