@@ -104,3 +104,24 @@ def accept(request):
             messages.warning("Unexpected error: "+str(e))
     
     return redirect('internship-applications')
+
+
+
+@login_required
+def deleteInternship(request):
+    if 'deletebtn' in request.POST:
+        currentCompanyName = request.POST.get('c_name')
+        currentCompanyDiscription = request.POST.get('c_discription')
+        try:
+            queryset = internshipPost.objects.filter(company_name=currentCompanyName)
+            check = 0
+            for q in queryset:
+                if q.discription==currentCompanyDiscription:
+                    q.delete()
+                    check=1
+                    messages.success(request,'Internship deleted!')
+            if check==0:
+                messages.warning(request,'No such internship!')
+        except Exception as e:
+            messages.warning("Unexpected error: "+str(e))
+    return redirect('InternsOnboard-Home')
