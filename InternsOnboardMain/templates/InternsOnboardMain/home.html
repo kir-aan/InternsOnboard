@@ -41,12 +41,19 @@
             </div>
         <br>
       {% for internship in internships %}
+      <form method="post" action="{% url 'internship-delete'  %}">
+        {% csrf_token %}
         <div class="card border mb-3">
             <div class="card-header">
              <div align="left">
-            {{ internship.company_name }}
-            <span style="float: right;">
-                <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5></span>
+               {{ internship.company_name }}
+            <span style="float: right;margin-right: 20px;margin-left:20px">
+              <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5>
+              <button style="float: right; margin-top: 10px;" class="btn btn-danger" name='deletebtn' type="submit">Delete</button>
+            </span>
+            <input type="text" name="c_discription" value="{{ internship.discription }}" style="visibility: hidden;">
+            <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
+
             </div>
             </div>
                 <div class="card-body">
@@ -54,6 +61,7 @@
                 </div>
         </div>
             <br>
+       </form>
        {% endfor %}
 
     {% elif user.userprofile.usertype == 'h' %}

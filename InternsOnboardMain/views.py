@@ -7,5 +7,3 @@ def home(request):
     finalApplicant = finalApplicants.objects.all()
     return render(request,'InternsOnboardMain/home.html',{'internships':internships,'finalApplicant':finalApplicant})
 
-def about(request):
-    return render(request,'InternsOnboardMain/about.html')
