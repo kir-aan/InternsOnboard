@@ -111,12 +111,12 @@ def accept(request):
 def deleteInternship(request):
     if 'deletebtn' in request.POST:
         currentCompanyName = request.POST.get('c_name')
-        currentCompanyDiscription = request.POST.get('c_discription')
+        currentCompanyDescription = request.POST.get('c_Description')
         try:
             queryset = internshipPost.objects.filter(company_name=currentCompanyName)
             check = 0
             for q in queryset:
-                if q.discription==currentCompanyDiscription:
+                if q.Description==currentCompanyDescription:
                     q.delete()
                     check=1
                     messages.success(request,'Internship deleted!')

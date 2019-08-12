@@ -16,7 +16,7 @@
         </div>
         </div>
         <div class="card-body">
-          <h3>{{ internship.discription }}
+          <h3>{{ internship.description }}
           <span style="float: right;">
           <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
           <button type="submit" class="btn btn-success" name="applybtn">Apply</button>
@@ -51,13 +51,13 @@
               <h5>added on: {{ internship.created_at|date:"F d, Y" }}</h5>
               <button style="float: right; margin-top: 10px;" class="btn btn-danger" name='deletebtn' type="submit">Delete</button>
             </span>
-            <input type="text" name="c_discription" value="{{ internship.discription }}" style="visibility: hidden;">
+            <input type="text" name="c_Description" value="{{ internship.description }}" style="visibility: hidden;">
             <input type="text" name="c_name" value="{{ internship.company_name }}" style="visibility: hidden;">
 
             </div>
             </div>
                 <div class="card-body">
-                    <h3>{{ internship.discription}}</h3>
+                    <h3>{{ internship.description}}</h3>
                 </div>
         </div>
             <br>
@@ -95,7 +95,20 @@
             </tbody>
     </table>
     {% else %}
-        Show default home page.
+    <br>
+    <img src="http://www.mvsrec.edu.in/images/mvsrec_logo.png" class="rounded mx-auto d-block" alt="...">
+    <br>
+    <p>
+        - Interns-Onboard is an online platform for internship coordinators to 
+        post internships and make it easier for them to accept/reject student applications.
+        <br>
+        - Students can view the current internship posts and can choose to apply or reject them.
+        <br>
+        - HOD(Head of department) can view list of all the students who have accepted or Rejected
+          the internships.
+        
+    </p>
+    
     {% endif %}
     </h2>
 {% endblock content%}

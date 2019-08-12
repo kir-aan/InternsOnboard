@@ -6,7 +6,7 @@ class InternshipsUploadForm(forms.ModelForm):
 
     class Meta:
         model = internshipPost
-        fields = ['company_name','discription']
+        fields = ['company_name','description']
 
     def __init__(self, *args, **kwargs):
         super(InternshipsUploadForm, self).__init__(*args, **kwargs)
