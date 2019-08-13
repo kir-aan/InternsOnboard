@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from rest_framework import response
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import InternshipsUploadForm
@@ -6,6 +7,7 @@ from InternsOnboardMain.models import internshipPost
 from django.contrib.auth.models import User
 from studentPortal.models import studentInternship
 from rest_framework.generics import ListAPIView
+from rest_framework.views import APIView
 from .serializers import internshipSerializer
 from .models import finalApplicants
 

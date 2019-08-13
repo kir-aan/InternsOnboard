@@ -5,6 +5,7 @@
    <h1>Internship Applications:</h1><br>
 {% if user.userprofile.usertype == 'ic' %}
     {% for internApplied in internApplication %}
+    {% if internApplied.applied %}
     <div class="card border mb-3">
         <div class="card-header">
         <form method="POST" action="{% url 'internship-accept' %}">
@@ -25,6 +26,7 @@
             </div>
         </div>
         <br>
+    {% endif %}
     {% endfor %}
 {% else %}
   <br>

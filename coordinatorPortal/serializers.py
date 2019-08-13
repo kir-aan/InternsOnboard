@@ -6,7 +6,8 @@ class internshipSerializer(ModelSerializer):
         model = internshipPost
         fields = [
             'id',
+            'owner',
             'company_name',
-            'discription',
-            'created_at'
+            'description',
+            'created_at',
         ]
