@@ -15,11 +15,6 @@ class internshipListAPIView(ListAPIView):
   queryset = internshipPost.objects.all()
   serializer_class = internshipSerializer
 
-class internshipView(APIView):
-    def get(self,request):
-        internships = internshipPost.objects.all()
-        return response({'internships':internships})
-
 
 @login_required
 def post(request):
