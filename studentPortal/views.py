@@ -1,11 +1,18 @@
 from django.shortcuts import render,get_object_or_404,redirect
 from django.http import HttpResponse
 from .models import studentInternship
+from coordinatorPortal.models import finalApplicants
 from .forms import studentInternshipForm
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from InternsOnboardMain.models import internshipPost
+
+@login_required
+def studentStatus(request):
+    internships = internshipPost.objects.all().order_by('-created_at') # change to desc order
+    finalApplicant = finalApplicants.objects.all()
+    return render(request,'studentPortal/status.html',{'internships':internships,'finalApplicant':finalApplicant})
 
 @login_required
 def apply(request):
@@ -58,5 +65,5 @@ def apply(request):
             messages.warning(request,'Rejected!')
         except Exception as e:
             messages.warning(request,"Unexpected error: "+str(e))
-        
+
     return redirect('InternsOnboard-Home')

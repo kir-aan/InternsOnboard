@@ -75,7 +75,7 @@ DATABASES = {
         },
         'NAME': 'internsonboardDB',
         'USER': 'root',
-        'PASSWORD': 'kiran8499',
+        'PASSWORD': 'K!ran8499',
         'HOST': 'localhost',
         'PORT': '3306',
     }

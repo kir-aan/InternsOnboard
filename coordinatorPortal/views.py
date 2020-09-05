@@ -104,7 +104,7 @@ def accept(request):
                 messages.success(request,"Rejected!")
         except Exception as e:
             messages.warning("Unexpected error: "+str(e))
-    
+
     return redirect('internship-applications')
 
 
@@ -125,5 +125,5 @@ def deleteInternship(request):
             if check==0:
                 messages.warning(request,'No such internship!')
         except Exception as e:
-            messages.warning("Unexpected error: "+str(e))
+            messages.warning(request,"Unexpected error: "+str(e))
     return redirect('InternsOnboard-Home')

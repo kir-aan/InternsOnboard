@@ -3,7 +3,11 @@
 {% block content %}
     <h2>
     {% if user.userprofile.usertype == 's' %}
-    <br><h1>Current internships</h1><hr>
+    <br><a href="{% url 'student-status' %}">
+    <button style="float: right; background-color: #3d6999;" class="btn btn-info" type="submit">
+    View Status </button></a>
+    <!-- <h1>{{user.userprofile.user}}</h1> -->
+    <h1>Current internships</h1><hr>
     {% for internship in internships %}
     <div class="card border mb-3">
         <div class="card-header">
@@ -98,20 +102,18 @@
             </tbody>
     </table>
     {% else %}
-    <br>
-    <img src="http://www.mvsrec.edu.in/images/mvsrec_logo.png" class="rounded mx-auto d-block" alt="...">
-    <br>
+    <br><hr>
     <p>
-        - Interns-Onboard is an online platform for internship coordinators to 
+        - Interns-Onboard is an online platform for internship coordinators to
         post internships and make it easier for them to accept/reject student applications.
-        <br>
+        <br><br>
         - Students can view the current internship posts and can choose to apply or reject them.
-        <br>
+        <br><br>
         - HOD(Head of department) can view list of all the students who have accepted or Rejected
           the internships.
-        
+        <hr>
     </p>
-    
+
     {% endif %}
     </h2>
 {% endblock content%}

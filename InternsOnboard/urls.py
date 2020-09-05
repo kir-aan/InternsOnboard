@@ -10,11 +10,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signup/', user_views.register,name="Register"),
     path('register/', user_views.register,name="Register"),
+    path('profile/', user_views.profile, name='profile'),
     path('login/', auth_views.LoginView.as_view(template_name='userRegister/login.html'), name='login'),
     path('logout/', auth_views.LogoutView.as_view(template_name='userRegister/logout.html'), name='logout'),
     path('', include('InternsOnboardMain.urls')),
     path('', include('coordinatorPortal.urls')),
     # path('api/posts/', include('coordinatorPortal.urls')),
     path('apply/',student_views.apply,name='student-apply'),
+    path('status/',student_views.studentStatus,name='student-status'),
     # path('accept/', coordinator_views.accept, name="internship-accept"),
 ]
